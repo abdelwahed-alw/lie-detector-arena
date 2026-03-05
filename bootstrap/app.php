@@ -10,9 +10,17 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware): void {
-        //
+    ->withMiddleware(function (Middleware $middleware) {
+        // Remove problematic middleware for Laravel 12
+        $middleware->remove([
+            \Illuminate\Foundation\Http\Middleware\ValidatePathEncoding::class,
+        ]);
+        
+        // Add web middleware group if needed
+        $middleware->web(append: [
+            // your web middleware
+        ]);
     })
-    ->withExceptions(function (Exceptions $exceptions): void {
+    ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
