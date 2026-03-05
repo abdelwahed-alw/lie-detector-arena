@@ -27,10 +27,11 @@
         <div class="md:col-span-2">
             <h3 class="font-bold mb-4">Write 3 statements about yourself</h3>
             <p class="text-sm text-gray-600 mb-4">2 truths + 1 lie</p>
-            
+            <p style="color:red">DEBUG - Player ID: {{ session('player_id') }}</p>
             <form action="/statements" method="POST">
                 @csrf
                 <input type="hidden" name="player_id" value="{{ session('player_id') }}">
+<!-- DEBUG: player_id = {{ session('player_id') }} -->
                 
                 @for($i = 0; $i < 3; $i++)
                 <div class="mb-4 p-4 border rounded {{ $i == 2 ? 'bg-red-50' : 'bg-green-50' }}">
