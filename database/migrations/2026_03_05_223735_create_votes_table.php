@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('votes', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+       Schema::create('votes', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('voter_id')->constrained('players')->cascadeOnDelete();
+    $table->foreignId('statement_id')->constrained()->cascadeOnDelete();
+    $table->timestamps();
+});
     }
 
     /**

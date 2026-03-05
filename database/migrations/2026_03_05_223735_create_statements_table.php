@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('statements', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+     Schema::create('statements', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('player_id')->constrained()->cascadeOnDelete();
+    $table->string('content', 200);
+    $table->boolean('is_lie')->default(false);
+    $table->json('ai_verdict')->nullable();
+    $table->timestamps();
+});
     }
 
     /**
